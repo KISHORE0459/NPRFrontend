@@ -33,7 +33,7 @@ const App = () => {
 
   const queryclient = new QueryClient();
   return (
-    <div className="min-h-dvh bg-gray-800 text-white font-sans">
+    <div className="min-h-dvh font-sans">
       <QueryClientProvider client={queryclient}>
         <RouterProvider router={router} />
       </QueryClientProvider>

@@ -1,9 +1,9 @@
 import { useQueries } from "@tanstack/react-query";
 import Nav from "../components/Nav";
 import { fetchentrydata } from "../services/services";
-import Loading from "../components/Loading";
 import Error from "../components/Error";
 import EntryDetails from "../components/EntryDetails";
+import Loader from "../components/Loader";
 const Entries = () => {
   const queries = useQueries({
     queries: [
@@ -21,7 +21,7 @@ const Entries = () => {
   return (
     <div className="flex flex-col items-center">
       <Nav />
-      {isLoading && <Loading />}
+      {isLoading && <Loader />}
       {error && <Error />}
       {!isLoading && !error && <EntryDetails data={data} />}
     </div>
