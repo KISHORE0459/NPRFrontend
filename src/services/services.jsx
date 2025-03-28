@@ -1,6 +1,8 @@
+const url = "https://nprbackend.onrender.com";
+
 export async function fetchuser() {
   try {
-    const res = await fetch("http://localhost:4000/api/users");
+    const res = await fetch(`${url}/api/users`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -10,7 +12,7 @@ export async function fetchuser() {
 
 export async function fetchentrydata() {
   try {
-    const res = await fetch("http://localhost:4000/api/entries");
+    const res = await fetch(`${url}/api/entries`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -20,7 +22,7 @@ export async function fetchentrydata() {
 
 export async function fetchexitdata() {
   try {
-    const res = await fetch("http://localhost:4000/api/exits");
+    const res = await fetch(`${url}/api/exits`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -30,7 +32,7 @@ export async function fetchexitdata() {
 
 export async function fetchpath() {
   try {
-    const res = await fetch("http://localhost:4000/api/path");
+    const res = await fetch(`${url}/api/path`);
     const data = await res.json();
     return data;
   } catch (e) {
@@ -40,7 +42,7 @@ export async function fetchpath() {
 
 export async function fetchuserbyname(name) {
   try {
-    const res = await fetch(`http://localhost:4000/api/users/name/${name}`);
+    const res = await fetch(`${url}/api/users/name/${name}`);
     const data = await res.json();
     return data;
   } catch (e) {
