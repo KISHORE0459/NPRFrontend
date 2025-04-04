@@ -1,12 +1,16 @@
 import { useQueries } from "@tanstack/react-query";
 import Nav from "../components/Nav";
-import { fetchuser, fetchuserbyname } from "../services/services";
+import {
+  fetchuser,
+  fetchuserbyname,
+  fetchuserbynp,
+} from "../services/services";
 import UserDetail from "../components/UserDetail";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import Loader from "../components/Loader";
-import { MdKeyboardArrowUp } from "react-icons/md";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import toast from "react-hot-toast";
 const User = () => {
   // have to create a function for fetching the user details by using licence plate number
   const quries = useQueries({
@@ -25,7 +29,7 @@ const User = () => {
   const [search, setSearch] = useState(false);
   const [searchuser, setSearchUser] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [searchFilter, setSearchFilter] = useState("Name");
+  const [searchFilter, setSearchFilter] = useState("name");
 
   async function fetchspecificuser() {
     if (searchInput.length <= 0) return;
@@ -36,6 +40,16 @@ const User = () => {
         setSearchUser(data[0]);
       } else {
         setSearch(false);
+        toast.error("User Not Found !");
+      }
+    } else {
+      const data = await fetchuserbynp(searchInput);
+      if (data) {
+        setSearch(true);
+        setSearchUser(data[0]);
+      } else {
+        setSearch(false);
+        toast.error("User Not Found !");
       }
     }
   }
@@ -57,6 +71,7 @@ const User = () => {
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && e.target.value.length > 0) {
+                console.log("working");
                 e.preventDefault();
                 fetchspecificuser();
               }

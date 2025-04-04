@@ -49,3 +49,13 @@ export async function fetchuserbyname(name) {
     console.log(e);
   }
 }
+
+export async function fetchuserbynp(np) {
+  try {
+    const res = await fetch(`${url}/api/users/np/${np}`);
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}

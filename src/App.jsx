@@ -4,6 +4,9 @@ import Exits from "./pages/Exits";
 import About from "./pages/About";
 import User from "./pages/User";
 
+//toast
+import { Toaster } from "react-hot-toast";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Space from "./pages/Space";
@@ -41,6 +44,7 @@ const App = () => {
     <div className="min-h-dvh font-sans">
       <QueryClientProvider client={queryclient}>
         <RouterProvider router={router} />
+        <Toaster position="bottom-center" reverseOrder={false} />
       </QueryClientProvider>
     </div>
   );
