@@ -5,7 +5,7 @@ import { useState } from "react";
 const Nav = () => {
   const [isMenu, setIsMenu] = useState(false);
   return (
-    <div className="w-full flex justify-center border-b-1 border-gray-500 text-[17px]">
+    <div className="w-full flex justify-center shadow-sm shadow-gray-400 text-[18px]">
       <nav className="md:w-[80%] w-full h-20 flex flex-row justify-between items-center p-3">
         <div className="flex flex-row gap-2 items-center text-1xl md:text-[18px]">
           <img
@@ -23,7 +23,7 @@ const Nav = () => {
             className="hover:cursor-pointer w-6 h-6"
           />
         </div>
-        <ul className="hidden md:flex flex-col md:flex-row md:justify-around md:gap-x-10 text-[18px]">
+        <ul className="hidden md:flex flex-col md:flex-row md:justify-around md:gap-x-10 text-[17px]">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
@@ -33,6 +33,16 @@ const Nav = () => {
             }
           >
             Home
+          </NavLink>
+          <NavLink
+            to={"/space"}
+            className={({ isActive }) =>
+              `hover:cursor-pointer hover:text-blue-500 hover:scale-110 ${
+                isActive ? "border-b-2 border-green-500" : "inactive"
+              }`
+            }
+          >
+            Free Space
           </NavLink>
           <NavLink
             to={"/entries"}
@@ -79,7 +89,7 @@ const Nav = () => {
       <ul
         className={`${
           isMenu ? "flex" : "hidden"
-        } md:hidden w-full h-auto flex-col gap-5 bg-white absolute left-0 top-20 p-3`}
+        } md:hidden w-full h-auto flex-col gap-5 bg-white absolute left-0 top-20 p-3 z-10`}
       >
         <li>
           <NavLink
@@ -91,6 +101,18 @@ const Nav = () => {
             }
           >
             Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={"/space"}
+            className={({ isActive }) =>
+              `hover:cursor-pointer hover:text-blue-500 hover:scale-110 ${
+                isActive ? "border-b-2 border-green-500" : "inactive"
+              }`
+            }
+          >
+            Free Space
           </NavLink>
         </li>
         <li>

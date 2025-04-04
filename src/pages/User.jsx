@@ -5,6 +5,8 @@ import UserDetail from "../components/UserDetail";
 import { useRef, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import Loader from "../components/Loader";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 const User = () => {
   // have to create a function for fetching the user details by using licence plate number
   const quries = useQueries({
@@ -21,16 +23,16 @@ const User = () => {
   const isLoading = quries.some((query) => query.isLoading);
 
   const [search, setSearch] = useState(false);
-  const [searchuser, setSearchUser] = useState();
-  const [searchInput, setSearchInput] = useState();
-  const option = useRef();
+  const [searchuser, setSearchUser] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchFilter, setSearchFilter] = useState("Name");
 
   async function fetchspecificuser() {
-    console.log(searchInput.length);
     if (searchInput.length <= 0) return;
-    if (option.current.value == "name") {
+    if (searchFilter == "name") {
       const data = await fetchuserbyname(searchInput);
       if (data) {
+        setSearch(true);
         setSearchUser(data[0]);
       } else {
         setSearch(false);
@@ -47,15 +49,15 @@ const User = () => {
             placeholder="Search User"
             onChange={(e) => {
               e.preventDefault();
-              setSearchInput(e.target.value);
               if (e.target.value.length == 0) {
                 setSearch(false);
+              } else {
+                setSearchInput(e.target.value);
               }
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && e.target.value.length > 0) {
                 e.preventDefault();
-                setSearch(true);
                 fetchspecificuser();
               }
             }}
@@ -64,7 +66,6 @@ const User = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setSearch(true);
               fetchspecificuser();
             }}
             className="p-1 border-l-2 border-[#1E40AF] w-10 hover:cursor-pointer hover:w-13 flex justify-center  items-center bg-[#0b7937]"
@@ -73,18 +74,22 @@ const User = () => {
           </button>
         </div>
         <div className="w-40">
-          <select
-            name=""
-            id=""
-            ref={option}
-            onInput={() => {
-              console.log(option.current.value);
-            }}
-            className="w-full p-1 border border-black rounded outline outline-black"
-          >
-            <option value="name">Name</option>
-            <option value="np">Licence Plate No</option>
-          </select>
+          <FormControl>
+            <InputLabel>Filter</InputLabel>
+            <Select
+              labelId="filter"
+              id="filter"
+              label="Filter"
+              onChange={(e) => {
+                console.log(searchFilter);
+                setSearchFilter(e.target.value);
+              }}
+              className="w-52 text-black h-[40px] flex justify-center items-center"
+            >
+              <MenuItem value={"name"}>Name</MenuItem>
+              <MenuItem value={"np"}>Licence Plate No</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
       {isLoading && <Loader />}
@@ -96,7 +101,10 @@ const User = () => {
           </h3>
           <div className="w-full flex flex-row gap-8 flex-wrap">
             {data.map((user) => (
-              <UserDetail user={user} key={user._id + user.user_name} />
+              <UserDetail
+                user={user}
+                key={user?.user_name + user?.number_plate}
+              />
             ))}
           </div>
         </div>

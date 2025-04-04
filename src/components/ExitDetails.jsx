@@ -7,7 +7,7 @@ const ExitDetails = ({ data }) => {
       <h3 className="text-xl text-[#1E40AF] font-semibold">
         User Exit Details
       </h3>
-      <div className="w-full flex flex-row flex-wrap gap-6">
+      <div className="flex flex-row flex-wrap gap-6">
         {data.map((dat) => (
           <UserExitDetail user={dat} key={dat.number_plate} />
         ))}

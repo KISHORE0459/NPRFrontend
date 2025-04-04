@@ -6,7 +6,7 @@ import { IoCarSportOutline } from "react-icons/io5";
 const UserDetail = ({ user }) => {
   return (
     user && (
-      <div className=" w-80 md:w-92 min-h-28 shadow-lg shadow-gray-300 flex flex-col gap-y-2 p-2 rounded hover:cursor-pointer hover:shadow-gray-500  hover:scale-x-105">
+      <div className="w-78 md:w-92 min-h-28 shadow-lg shadow-gray-300 flex flex-col gap-y-2 p-2 rounded hover:cursor-pointer hover:shadow-gray-500  hover:scale-x-105">
         <div className="flex flex-row justify-between">
           <h3 className="text-[20px] font-semibold text-[#1E40AF]">
             {user.user_name}

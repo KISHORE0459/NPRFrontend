@@ -1,6 +1,7 @@
 import { useQueries } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { fetchpath } from "../services/services";
+import Loader from "./Loader";
 
 const directions = [
   [1, 0], // Down
@@ -74,11 +75,15 @@ const NearestPath = () => {
 
   const gridCols = grid[0]?.length || 1;
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     !isLoading &&
     !error && (
-      <div className="flex flex-col items-center justify-center p-5">
-        <h1 className="text-2xl font-bold mb-4">
+      <div className="w-fit flex flex-col items-center justify-center p-5 border border-[#aeabab] shadow-md shadow-gray-200">
+        <h1 className="text-2xl font-bold mb-4 text-[#1E40AF]">
           Shortest Path to Nearest Free Space
         </h1>
         <div
